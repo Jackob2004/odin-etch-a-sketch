@@ -12,6 +12,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100%;
+    flex-direction: column;
 }
 
 .grid-container {
@@ -20,4 +21,11 @@ body {
     width: 600px;
     height: 600px;
     border: 5px solid black;
+    gap: 0;
+}
+
+button {
+    padding: 10px;
+    margin-bottom: 10px;
+    font-weight: bold;
 }
