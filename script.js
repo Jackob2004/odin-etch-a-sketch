@@ -1,4 +1,5 @@
 const BASE_GRID_SIZE = 600;
+const HEX_CHARACTERS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"];
 const gridContainer = document.querySelector('.grid-container');
 
 function calculateElementSize(elementsInRow) {
@@ -17,14 +18,33 @@ function createGridElements(elementsInRow = 16) {
     }
 }
 
+function getRandomHexColor() {
+    let hexColor = "#";
+
+    for (let i = 0; i < 6; i++) {
+        const randomIndex = Math.floor(Math.random() * HEX_CHARACTERS.length);
+        hexColor += HEX_CHARACTERS[randomIndex];
+    }
+
+    return hexColor;
+}
+
 function changeGridElementColor(event) {
     const gridElement = event.target;
 
     if (gridElement === gridContainer) return;
 
-    if (gridElement.style.backgroundColor !== '') return;
+    if (gridElement.style.backgroundColor === '') {
+        gridElement.style.opacity = '0.1';
+        gridElement.style.backgroundColor = `${getRandomHexColor()}`;
+        return;
+    }
 
-    gridElement.style.backgroundColor = 'black';
+    let updatedOpacity = (+gridElement.style.opacity + 0.1).toFixed(1);
+    
+    if (updatedOpacity <= 1.0) {
+        gridElement.style.opacity = `${updatedOpacity}`;
+    }
 }
 
 function regenerateGrid() {
