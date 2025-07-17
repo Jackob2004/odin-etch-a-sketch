@@ -1,6 +1,7 @@
 const BASE_GRID_SIZE = 600;
+const gridContainer = document.querySelector('.grid-container');
 
-function createGridElements(elementsInRow, gridContainer) {
+function createGridElements(elementsInRow) {
     const totalGridElements = elementsInRow * elementsInRow;
     const elementSize = Math.floor(BASE_GRID_SIZE / elementsInRow);
 
@@ -13,7 +14,7 @@ function createGridElements(elementsInRow, gridContainer) {
     }
 }
 
-function adjustGridSize(elementsInRow, gridContainer) {
+function adjustGridSize(elementsInRow) {
     const GRID_ELEMENT_BORDER= 2;
 
     let adjustedGridSize = BASE_GRID_SIZE + GRID_ELEMENT_BORDER * elementsInRow;
@@ -26,13 +27,22 @@ function adjustGridSize(elementsInRow, gridContainer) {
 }
 
 function generateGrid() {
-    const gridContainer = document.querySelector('.grid-container');
     let elementsInRow= 16;
 
-    createGridElements(elementsInRow, gridContainer);
-    adjustGridSize(elementsInRow, gridContainer);
+    createGridElements(elementsInRow);
+    adjustGridSize(elementsInRow);
 }
 
 generateGrid();
 
+function changeGridElementColor(event) {
+    const gridElement = event.target;
 
+    if (gridElement === gridContainer) return;
+
+    if (gridElement.style.backgroundColor !== '') return;
+
+    gridElement.style.backgroundColor = 'black';
+}
+
+gridContainer.addEventListener('mouseover', changeGridElementColor);
