@@ -4,8 +4,15 @@ const gridContainer = document.querySelector('.grid-container');
 
 const dimensionInput = document.querySelector('.dimension-control input');
 const dimensionLabel = document.querySelector('.dimension-control label');
+const mainPanelButtons = document.querySelectorAll('.buttons-panel button');
 
+const paintModes= Object.freeze({
+    ERASER: "ERASER",
+    BLACK: "BLACK",
+    RGB: "RGB",
+});
 let mouseDown = false;
+let currPaintMode = paintModes.RGB;
 
 function calculateElementSize(elementsInRow) {
     const GRID_ELEMENT_BORDER= 2;
@@ -34,6 +41,32 @@ function getRandomHexColor() {
     return hexColor;
 }
 
+function getCurrentHexColor() {
+    let color;
+
+    switch (currPaintMode) {
+        case paintModes.ERASER:
+            color = "#FFFFFF";
+            break;
+        case paintModes.BLACK:
+            color = "#000000";
+            break;
+        case paintModes.RGB:
+            color = getRandomHexColor();
+            break;
+    }
+
+    return color;
+}
+
+function updateOpacity(gridElement) {
+    let updatedOpacity = (+gridElement.style.opacity + 0.1).toFixed(1);
+
+    if (updatedOpacity <= 1.0) {
+        gridElement.style.opacity = `${updatedOpacity}`;
+    }
+}
+
 function changeGridElementColor(event) {
     if (!mouseDown) return;
 
@@ -41,17 +74,14 @@ function changeGridElementColor(event) {
 
     if (gridElement === gridContainer) return;
 
-    if (gridElement.style.backgroundColor === '') {
-        gridElement.style.opacity = '0.1';
-        gridElement.style.backgroundColor = `${getRandomHexColor()}`;
+    gridElement.style.backgroundColor = getCurrentHexColor();
+
+    if (currPaintMode === paintModes.ERASER){
+        gridElement.style.opacity = '';
         return;
     }
 
-    let updatedOpacity = (+gridElement.style.opacity + 0.1).toFixed(1);
-    
-    if (updatedOpacity <= 1.0) {
-        gridElement.style.opacity = `${updatedOpacity}`;
-    }
+    updateOpacity(gridElement);
 }
 
 function regenerateGrid() {
@@ -74,6 +104,14 @@ function updateDimensionByOne(value) {
     regenerateGrid();
 }
 
+function changePaintMode(paintMode, event) {
+    mainPanelButtons.forEach((button) => button.style.boxShadow = 'none');
+    const button = event.target;
+    button.style.boxShadow = '2px 4px 16px rgba(9 249 127)';
+
+    currPaintMode = paintMode;
+}
+
 createGridElements();
 
 gridContainer.addEventListener('mouseover', changeGridElementColor);
@@ -81,13 +119,17 @@ gridContainer.addEventListener('mouseover', changeGridElementColor);
 dimensionInput.addEventListener('change', regenerateGrid);
 dimensionInput.addEventListener('input', () => updateInputLabel());
 
-document.querySelector('.subtract').addEventListener('click', () => updateDimensionByOne(-1));
-document.querySelector('.addition').addEventListener('click', () => updateDimensionByOne(1));
+document.querySelector('#subtract').addEventListener('click', () => updateDimensionByOne(-1));
+document.querySelector('#addition').addEventListener('click', () => updateDimensionByOne(1));
 
 gridContainer.onmousedown = (e) => {
     e.preventDefault();
     mouseDown = true;
 }
-
 document.body.onmouseup = () => mouseDown = false;
-// TODO: ability to change between black/rgb/eraser, better looking UI
+
+document.querySelector('#reset').onclick = () => regenerateGrid();
+document.querySelector('#eraser').onclick = (e) => changePaintMode(paintModes.ERASER, e);
+document.querySelector('#black').onclick = (e) => changePaintMode(paintModes.BLACK, e);
+document.querySelector('#rgb').onclick = (e) => changePaintMode(paintModes.RGB, e);
+// TODO: better looking UI

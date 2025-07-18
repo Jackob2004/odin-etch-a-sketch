@@ -15,6 +15,31 @@ body {
     flex-direction: column;
 }
 
+.main-panel {
+    display: flex;
+    gap: 50px;
+}
+
+.buttons-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.buttons-panel button {
+    padding: 15px 30px;
+    border-left: none;
+    border-top: none;
+    border-right: 4px solid gray;
+    border-bottom: 4px solid gray;
+    background-color: lightgray;
+    font-weight: bold;
+}
+
+#rgb {
+    box-shadow: 2px 4px 16px rgba(9 249 127);
+}
+
 .dimension-control {
     margin-bottom: 30px;
 }
