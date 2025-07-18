@@ -1,9 +1,10 @@
 const BASE_GRID_SIZE = 600;
 const HEX_CHARACTERS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"];
-const gridContainer = document.querySelector('.grid-container');
 
+const gridContainer = document.querySelector('.grid-container');
 const dimensionInput = document.querySelector('.dimension-control input');
 const dimensionLabel = document.querySelector('.dimension-control label');
+
 const mainPanelButtons = document.querySelectorAll('.buttons-panel button');
 
 const paintModes= Object.freeze({
@@ -11,12 +12,12 @@ const paintModes= Object.freeze({
     BLACK: "BLACK",
     RGB: "RGB",
 });
+
 let mouseDown = false;
 let currPaintMode = paintModes.RGB;
 
 function calculateElementSize(elementsInRow) {
-    const GRID_ELEMENT_BORDER= 2;
-    return BASE_GRID_SIZE / elementsInRow - GRID_ELEMENT_BORDER;
+    return BASE_GRID_SIZE / elementsInRow;
 }
 
 function createGridElements(elementsInRow = 16) {
@@ -25,7 +26,7 @@ function createGridElements(elementsInRow = 16) {
 
     for (let i = 0; i < totalGridElements; i++) {
         const gridElement = document.createElement('div');
-        gridElement.setAttribute('style', `border: 1px solid black; flex: 1 1 ${elementSize}px`);
+        gridElement.setAttribute('style', `flex: 1 1 ${elementSize}px`);
         gridContainer.appendChild(gridElement);
     }
 }
@@ -46,7 +47,7 @@ function getCurrentHexColor() {
 
     switch (currPaintMode) {
         case paintModes.ERASER:
-            color = "#FFFFFF";
+            color = "";
             break;
         case paintModes.BLACK:
             color = "#000000";
@@ -132,4 +133,3 @@ document.querySelector('#reset').onclick = () => regenerateGrid();
 document.querySelector('#eraser').onclick = (e) => changePaintMode(paintModes.ERASER, e);
 document.querySelector('#black').onclick = (e) => changePaintMode(paintModes.BLACK, e);
 document.querySelector('#rgb').onclick = (e) => changePaintMode(paintModes.RGB, e);
-// TODO: better looking UI
