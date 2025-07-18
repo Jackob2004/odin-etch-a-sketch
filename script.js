@@ -115,7 +115,7 @@ function changePaintMode(paintMode, event) {
 
 createGridElements();
 
-gridContainer.addEventListener('mouseover', changeGridElementColor);
+gridContainer.addEventListener('mouseout', changeGridElementColor);
 
 dimensionInput.addEventListener('change', regenerateGrid);
 dimensionInput.addEventListener('input', () => updateInputLabel());
