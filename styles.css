@@ -15,6 +15,21 @@ body {
     flex-direction: column;
 }
 
+.dimension-control {
+    margin-bottom: 30px;
+}
+
+.dimension-control button {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
 .grid-container {
     display: flex;
     flex-wrap: wrap;
@@ -24,8 +39,6 @@ body {
     gap: 0;
 }
 
-button {
-    padding: 10px;
-    margin-bottom: 10px;
-    font-weight: bold;
+h1 {
+    margin-bottom: 50px;
 }

@@ -8,7 +8,16 @@
     <script src="script.js" defer></script>
 </head>
 <body>
-    <button>Change grid's size</button>
+    <h1><em>Etch-a-Sketch</em></h1>
+
+    <p>Change grid's dimension</p>
+    <div class="dimension-control">
+        <button class="subtract">-</button>
+        <input type="range" min="1" max="100" value="16" step="1" id="dimension-slider">
+        <label for="dimension-slider">16x16</label>
+        <button class="addition">+</button>
+    </div>
+
     <div class="grid-container">
 
     </div>
