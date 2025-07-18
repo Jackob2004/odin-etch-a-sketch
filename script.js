@@ -5,6 +5,8 @@ const gridContainer = document.querySelector('.grid-container');
 const dimensionInput = document.querySelector('.dimension-control input');
 const dimensionLabel = document.querySelector('.dimension-control label');
 
+let mouseDown = false;
+
 function calculateElementSize(elementsInRow) {
     const GRID_ELEMENT_BORDER= 2;
     return BASE_GRID_SIZE / elementsInRow - GRID_ELEMENT_BORDER;
@@ -33,6 +35,8 @@ function getRandomHexColor() {
 }
 
 function changeGridElementColor(event) {
+    if (!mouseDown) return;
+
     const gridElement = event.target;
 
     if (gridElement === gridContainer) return;
@@ -79,4 +83,11 @@ dimensionInput.addEventListener('input', () => updateInputLabel());
 
 document.querySelector('.subtract').addEventListener('click', () => updateDimensionByOne(-1));
 document.querySelector('.addition').addEventListener('click', () => updateDimensionByOne(1));
-// TODO: ability to change between black/rgb/eraser, change colors on hover + left click down, better looking UI
+
+gridContainer.onmousedown = (e) => {
+    e.preventDefault();
+    mouseDown = true;
+}
+
+document.body.onmouseup = () => mouseDown = false;
+// TODO: ability to change between black/rgb/eraser, better looking UI
