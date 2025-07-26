@@ -118,7 +118,7 @@ createGridElements();
 gridContainer.addEventListener('mouseout', changeGridElementColor);
 
 dimensionInput.addEventListener('change', regenerateGrid);
-dimensionInput.addEventListener('input', () => updateInputLabel());
+dimensionInput.addEventListener('input', updateInputLabel);
 
 document.querySelector('#subtract').addEventListener('click', () => updateDimensionByOne(-1));
 document.querySelector('#addition').addEventListener('click', () => updateDimensionByOne(1));
