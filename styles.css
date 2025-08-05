@@ -1,3 +1,10 @@
+:root {
+    --dark-grey: #222831;
+    --light-grey: #393E46;
+    --dark-cream: #948979;
+    --light-cream: #DFD0B8
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -13,13 +20,13 @@ body {
     align-items: center;
     min-height: 100%;
     flex-direction: column;
-    background: linear-gradient(90deg, rgba(34, 40, 49, 1) 0%, rgba(57, 62, 70, 1) 48%, rgba(148, 137, 121, 1) 100%);
+    background: linear-gradient(90deg, var(--dark-grey) 0%, var(--light-grey) 48%, var(--dark-cream) 100%);
 }
 
 button {
-    background-color: #393E46;
+    background-color: var(--light-grey);
     font-weight: bold;
-    color: #DFD0B8;
+    color: var(--light-cream);
 }
 
 .main-panel {
@@ -34,35 +41,33 @@ button {
 }
 
 .buttons-panel button {
+    --btn-border-color: #24262b;
     padding: 15px 30px;
     border-left: none;
     border-top: none;
-    border-right: 4px solid #24262b;
-    border-bottom: 4px solid #24262b;
+    border-right: 4px solid var(--btn-border-color);
+    border-bottom: 4px solid var(--btn-border-color);
 }
 
 #rgb {
     box-shadow: 2px 4px 16px rgba(9 249 127);
 }
 
-.dimension-control {
-    margin-bottom: 30px;
-}
-
 .dimension-control button {
     margin: 10px;
     padding: 10px;
     border-radius: 10px;
-    border: 1px solid #DFD0B8;
-}
-
-p {
-    margin-bottom: 10px;
-    color: #948979;
+    border: 1px solid var(--light-cream);
 }
 
 label {
-    color: #DFD0B8;
+    margin-bottom: 10px;
+    color: var(--dark-cream);
+}
+
+output {
+    margin-bottom: 30px;
+    color: var(--light-cream);
 }
 
 .grid-container {
@@ -70,10 +75,10 @@ label {
     flex-wrap: wrap;
     width: 600px;
     height: 600px;
-    background-color: #393E46;
+    background-color: var(--light-grey);
 }
 
 h1 {
     margin-bottom: 50px;
-    color: #DFD0B8;
+    color: var(--light-cream);
 }

@@ -10,13 +10,13 @@
 <body>
     <h1><em>Etch-a-Sketch</em></h1>
 
-    <p>Change grid's dimension</p>
+    <label for="dimension-slider">Change grid's size</label>
     <div class="dimension-control">
         <button id="subtract">-</button>
         <input type="range" min="1" max="100" value="16" step="1" id="dimension-slider">
-        <label for="dimension-slider">16x16</label>
         <button id="addition">+</button>
     </div>
+    <output for="dimension-slider" id="dimension-output">16x16</output>
 
     <div class="main-panel">
 

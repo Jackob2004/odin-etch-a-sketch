@@ -3,7 +3,7 @@ const HEX_CHARACTERS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "
 
 const gridContainer = document.querySelector('.grid-container');
 const dimensionInput = document.querySelector('.dimension-control input');
-const dimensionLabel = document.querySelector('.dimension-control label');
+const dimensionOutput= document.querySelector('output');
 
 const mainPanelButtons = document.querySelectorAll('.buttons-panel button');
 
@@ -94,7 +94,7 @@ function regenerateGrid() {
 
 function updateInputLabel() {
     const currentValue = dimensionInput.value;
-    dimensionLabel.textContent = currentValue + "x" + currentValue;
+    dimensionOutput.textContent = currentValue + "x" + currentValue;
 }
 
 function updateDimensionByOne(value) {
